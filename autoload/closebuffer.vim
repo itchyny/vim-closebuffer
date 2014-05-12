@@ -2,7 +2,7 @@
 " Filename: autoload/closebuffer.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2014/04/23 16:08:17.
+" Last Change: 2014/04/30 15:55:36.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -12,7 +12,7 @@ function! closebuffer#close()
   try
     if index(get(g:, 'closebuffer_filetype_bwipeout', [ 'quickrun' ]), &ft) >= 0
       silent bw!
-    elseif index(get(g:, 'closebuffer_filetype_quit', [ 'vimshell', 'vimfiler' ]), &ft) >= 0
+    elseif index(get(g:, 'closebuffer_filetype_quit', [ 'vimshell', 'vimfiler', 'vimcalc' ]), &ft) >= 0
       silent q
     elseif index(get(g:, 'closebuffer_filetype_feedkeyq', [ 'gundo', 'calendar' ]), &ft) >= 0
       \ || index(get(g:, 'closebuffer_filename_feedkeyq', [ '__Gundo_Preview__' ]), expand('%:t')) >= 0
