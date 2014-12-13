@@ -2,7 +2,7 @@
 " Filename: autoload/closebuffer.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2014/11/19 11:50:08.
+" Last Change: 2014/12/07 19:03:10.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -21,6 +21,13 @@ function! closebuffer#close()
       silent bd!
     elseif index(get(g:, 'closebuffer_filename_bdelete', [ '__XtermColorTable__' ]), expand('%:t')) >= 0
       silent bd!
+    elseif &ft ==# 'qf'
+      try
+        wincmd p
+        cclose
+      catch
+        enew
+      endtry
     elseif len(filter(range(1, winnr('$')), 'winbufnr(v:val) == winbufnr(0)')) > 1
       silent q
     elseif &ft == '' && !&modified || (exists('*getcmdwintype') ? getcmdwintype() !=# '' : bufname('%') ==# '[Command Line]')
