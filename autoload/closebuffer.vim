@@ -2,13 +2,13 @@
 " Filename: autoload/closebuffer.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2014/12/07 19:03:10.
+" Last Change: 2014/12/17 00:17:29.
 " =============================================================================
 
 let s:save_cpo = &cpo
 set cpo&vim
 
-function! closebuffer#close()
+function! closebuffer#close() abort
   try
     if index(get(g:, 'closebuffer_filetype_bwipeout', [ 'quickrun' ]), &ft) >= 0
       silent bw!
