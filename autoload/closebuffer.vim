@@ -2,7 +2,7 @@
 " Filename: autoload/closebuffer.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2014/12/17 00:17:29.
+" Last Change: 2015/02/01 23:50:07.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -30,7 +30,7 @@ function! closebuffer#close() abort
       endtry
     elseif len(filter(range(1, winnr('$')), 'winbufnr(v:val) == winbufnr(0)')) > 1
       silent q
-    elseif &ft == '' && !&modified || (exists('*getcmdwintype') ? getcmdwintype() !=# '' : bufname('%') ==# '[Command Line]')
+    elseif &ft ==# '' && !&modified || (exists('*getcmdwintype') ? getcmdwintype() !=# '' : bufname('%') ==# '[Command Line]')
       silent q!
     elseif &modified
     else
