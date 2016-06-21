@@ -2,7 +2,7 @@
 " Filename: autoload/closebuffer.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2016/06/13 07:57:48.
+" Last Change: 2016/06/21 22:28:21.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -23,9 +23,12 @@ function! closebuffer#close() abort
       silent bd!
     elseif &ft ==# 'qf'
       try
-        let cmd = get(b:, 'qflisttype', '') ==# 'location' ? 'lclose' : 'cclose'
-        wincmd p
-        execute cmd
+        if get(b:, 'qflisttype', '') ==# 'location'
+          lclose
+        else
+          wincmd p
+          lclose
+        endif
       catch
         enew
       endtry
