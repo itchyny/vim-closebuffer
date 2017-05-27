@@ -2,7 +2,7 @@
 " Filename: autoload/closebuffer.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2017/04/27 05:38:29.
+" Last Change: 2017/05/28 02:21:28.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -26,8 +26,7 @@ function! closebuffer#close() abort
         if get(get(getwininfo(win_getid()), 0, {}), 'loclist', 0)
           lclose
         else
-          wincmd p
-          lclose
+          cclose
         endif
       catch
         enew
