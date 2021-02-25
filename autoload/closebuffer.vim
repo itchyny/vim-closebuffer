@@ -2,7 +2,7 @@
 " Filename: autoload/closebuffer.vim
 " Author: itchyny
 " License: MIT License
-" Last Change: 2021/02/23 17:50:26.
+" Last Change: 2021/02/25 22:09:48.
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -32,7 +32,7 @@ function! closebuffer#close() abort
         enew
       endtry
     elseif expand('%') =~# '\v^(gita|gina)://'
-      if len(filter(range(1, winnr('$')), 'bufname(v:val) =~# "gita\\|gina"')) > 1
+      if len(filter(range(1, winnr('$')), 'bufname(winbufnr(v:val)) =~# "gita\\|gina"')) > 1
         tabclose!
       else
         quit!
